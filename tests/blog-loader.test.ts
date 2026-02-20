@@ -1,5 +1,5 @@
 /**
- * Comprehensive test suite for @tinyland-inc/tinyland-blog-loader
+ * Comprehensive test suite for @tummycrypt/tinyland-blog-loader
  *
  * Target: 110+ tests covering types, config DI, filters, loader functions,
  * series, aggregation helpers, related posts, and utility functions.

@@ -1,5 +1,5 @@
 /**
- * Type definitions for @tinyland-inc/tinyland-blog-loader
+ * Type definitions for @tummycrypt/tinyland-blog-loader
  *
  * These are framework-agnostic, internalized versions of the blog types
  * that the loader inspects. They are kept minimal and self-contained

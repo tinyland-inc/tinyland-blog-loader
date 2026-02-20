@@ -1,5 +1,5 @@
 /**
- * Configuration module for @tinyland-inc/tinyland-blog-loader
+ * Configuration module for @tummycrypt/tinyland-blog-loader
  *
  * Provides dependency injection for content-loading functions so the
  * package stays framework-agnostic. Consumers wire in their own

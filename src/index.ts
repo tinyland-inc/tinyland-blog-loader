@@ -1,5 +1,5 @@
 /**
- * @tinyland-inc/tinyland-blog-loader
+ * @tummycrypt/tinyland-blog-loader
  *
  * Framework-agnostic blog post loader with filtering, pagination,
  * and content discovery. Content I/O is injected via configure()
@@ -12,7 +12,7 @@
  *   loadBlogPosts,
  *   loadBlogPost,
  *   getRelatedPosts,
- * } from '@tinyland-inc/tinyland-blog-loader';
+ * } from '@tummycrypt/tinyland-blog-loader';
  *
  * configure({
  *   loadContent: myContentLoader,

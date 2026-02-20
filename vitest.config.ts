@@ -1,5 +1,5 @@
 /**
- * Vitest Configuration for @tinyland-inc/tinyland-blog-loader
+ * Vitest Configuration for @tummycrypt/tinyland-blog-loader
  *
  * Works in three modes:
  *   1. Standalone:  cd packages/tinyland-blog-loader && pnpm test

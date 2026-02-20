@@ -1,5 +1,5 @@
 {
-  "name": "@tinyland-inc/tinyland-blog-loader",
+  "name": "@tummycrypt/tinyland-blog-loader",
   "version": "0.1.0",
   "description": "Blog post loader with filtering, pagination, and content discovery",
   "type": "module",
@@ -42,5 +42,9 @@
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
