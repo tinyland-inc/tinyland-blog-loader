@@ -1,6 +1,6 @@
 {
   "name": "@tummycrypt/tinyland-blog-loader",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Blog post loader with filtering, pagination, and content discovery",
   "type": "module",
   "license": "Zlib AND LicenseRef-Tinyland-Proprietary",
