@@ -1,13 +1,13 @@
-/**
- * Comprehensive test suite for @tummycrypt/tinyland-blog-loader
- *
- * Target: 110+ tests covering types, config DI, filters, loader functions,
- * series, aggregation helpers, related posts, and utility functions.
- */
+
+
+
+
+
+
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  // Types (imported for type-level assertions)
+  
   type VideoEmbed,
   type Reference,
   type BlogFrontmatter,
@@ -15,17 +15,17 @@ import {
   type BlogListOptions,
   type BlogLoaderConfig,
   type ContentItem,
-  // Config DI
+  
   configure,
   getConfig,
   resetConfig,
-  // Filters
+  
   matchesFilters,
-  // Utilities
+  
   calculateReadingTime,
   calculateWordCount,
   extractExcerpt,
-  // Loaders
+  
   loadBlogPosts,
   loadBlogPostsSync,
   loadBlogPost,
@@ -37,9 +37,9 @@ import {
   getRelatedPosts,
 } from '../src/index.js';
 
-// ---------------------------------------------------------------------------
-// Test fixtures
-// ---------------------------------------------------------------------------
+
+
+
 
 function makeContentItem(overrides: Partial<ContentItem> & { metadata?: Record<string, unknown> }): ContentItem {
   return {
@@ -58,10 +58,10 @@ function makeFrontmatter(overrides: Partial<BlogFrontmatter> = {}): BlogFrontmat
   };
 }
 
-/**
- * Build a mock content loader from an array of ContentItems.
- * Wires up loadContent, loadSingleContent, and findContentBySlug.
- */
+
+
+
+
 function buildMockLoaders(items: ContentItem[]): BlogLoaderConfig {
   return {
     loadContent: (_type: string, options?: { handle?: string; aggregateAll?: boolean }) => {
@@ -79,7 +79,7 @@ function buildMockLoaders(items: ContentItem[]): BlogLoaderConfig {
   };
 }
 
-// Shared fixture posts
+
 const FIXTURE_POSTS: ContentItem[] = [
   makeContentItem({
     metadata: {
@@ -164,9 +164,9 @@ const FIXTURE_POSTS: ContentItem[] = [
   }),
 ];
 
-// ---------------------------------------------------------------------------
-// 1. Types (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('Types', () => {
   it('BlogFrontmatter should require title', () => {
@@ -229,9 +229,9 @@ describe('Types', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 2. Config DI (10+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('Config DI', () => {
   beforeEach(() => {
@@ -310,9 +310,9 @@ describe('Config DI', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 3. matchesFilters (20+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('matchesFilters', () => {
   it('passes all when no filters specified', () => {
@@ -449,9 +449,9 @@ describe('matchesFilters', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 4. loadBlogPosts (15+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadBlogPosts', () => {
   beforeEach(() => {
@@ -466,7 +466,7 @@ describe('loadBlogPosts', () => {
 
   it('sorts by date newest first', async () => {
     const posts = await loadBlogPosts();
-    // Draft (Aug 1) > Post B (Jul 15) > Post A (Jun 1) > Post C (May 10) > Post D (Apr 1)
+    
     expect(posts[0].slug).toBe('draft-post');
     expect(posts[1].slug).toBe('post-b');
     expect(posts[2].slug).toBe('post-a');
@@ -474,7 +474,7 @@ describe('loadBlogPosts', () => {
 
   it('uses publishedAt over date for sorting', async () => {
     const posts = await loadBlogPosts();
-    // Post A has publishedAt: 2024-06-01, Post C has date: 2024-05-10
+    
     const indexA = posts.findIndex((p) => p.slug === 'post-a');
     const indexC = posts.findIndex((p) => p.slug === 'post-c');
     expect(indexA).toBeLessThan(indexC);
@@ -519,13 +519,13 @@ describe('loadBlogPosts', () => {
 
   it('filters by handle', async () => {
     const posts = await loadBlogPosts({ handle: 'alice' });
-    // The mock loadContent filters by ownerHandle
+    
     expect(posts.every((p) => p.frontmatter.author === 'alice')).toBe(true);
   });
 
   it('filters by tags', async () => {
     const posts = await loadBlogPosts({ tags: ['svelte'] });
-    expect(posts.length).toBe(2); // post-a and post-d
+    expect(posts.length).toBe(2); 
   });
 
   it('filters by categories', async () => {
@@ -562,13 +562,13 @@ describe('loadBlogPosts', () => {
       tags: ['typescript'],
       visibility: ['public'],
     });
-    expect(posts.length).toBe(2); // post-a and post-b
+    expect(posts.length).toBe(2); 
   });
 });
 
-// ---------------------------------------------------------------------------
-// 5. loadBlogPostsSync (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadBlogPostsSync', () => {
   beforeEach(() => {
@@ -603,9 +603,9 @@ describe('loadBlogPostsSync', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 6. loadBlogPost (8+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadBlogPost', () => {
   beforeEach(() => {
@@ -658,9 +658,9 @@ describe('loadBlogPost', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 7. loadBlogPostSync (3+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadBlogPostSync', () => {
   beforeEach(() => {
@@ -687,9 +687,9 @@ describe('loadBlogPostSync', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 8. loadSeries (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('loadSeries', () => {
   beforeEach(() => {
@@ -739,9 +739,9 @@ describe('loadSeries', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 9. getAllTags (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getAllTags', () => {
   beforeEach(() => {
@@ -793,9 +793,9 @@ describe('getAllTags', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 10. getAllCategories (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getAllCategories', () => {
   beforeEach(() => {
@@ -838,9 +838,9 @@ describe('getAllCategories', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 11. getAllSeries (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getAllSeries', () => {
   beforeEach(() => {
@@ -883,9 +883,9 @@ describe('getAllSeries', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 12. getRelatedPosts (10+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('getRelatedPosts', () => {
   beforeEach(() => {
@@ -899,9 +899,9 @@ describe('getRelatedPosts', () => {
   });
 
   it('scores shared tags at 2x weight', async () => {
-    // post-a has tags: ['svelte', 'typescript']
-    // post-b has tags: ['typescript', 'node'] => 1 shared tag => score += 2
-    // post-d has tags: ['svelte'] => 1 shared tag => score += 2
+    
+    
+    
     const related = await getRelatedPosts('post-a');
     const slugs = related.map((p) => p.slug);
     expect(slugs).toContain('post-b');
@@ -909,24 +909,24 @@ describe('getRelatedPosts', () => {
   });
 
   it('scores shared categories at 1x weight', async () => {
-    // post-a has categories: ['frontend']
-    // post-c has categories: ['frontend'] => score += 1
+    
+    
     const related = await getRelatedPosts('post-a');
     const slugs = related.map((p) => p.slug);
     expect(slugs).toContain('post-c');
   });
 
   it('scores same series at 10x', async () => {
-    // post-a series: 'SvelteKit Deep Dive'
-    // post-b series: 'SvelteKit Deep Dive' => score += 10
+    
+    
     const related = await getRelatedPosts('post-a');
-    // post-b should be first due to series bonus (10) + shared tag (2) + shared author (1) = 13
+    
     expect(related[0].slug).toBe('post-b');
   });
 
   it('scores same author at 1x', async () => {
-    // post-a author: 'alice'
-    // post-b author: 'alice' => score += 1
+    
+    
     const related = await getRelatedPosts('post-a');
     const postB = related.find((p) => p.slug === 'post-b');
     expect(postB).toBeDefined();
@@ -944,9 +944,9 @@ describe('getRelatedPosts', () => {
 
   it('sorts by score descending', async () => {
     const related = await getRelatedPosts('post-a');
-    // post-b should score highest (series=10 + tag=2 + author=1 = 13)
-    // post-d should score next (tag=2 + category=1 = 3)
-    // post-c should score lower (category=1 = 1)
+    
+    
+    
     if (related.length >= 2) {
       expect(related[0].slug).toBe('post-b');
     }
@@ -975,7 +975,7 @@ describe('getRelatedPosts', () => {
   });
 
   it('only includes published posts', async () => {
-    // draft-post should not appear in related posts (publishedOnly: true in getRelatedPosts)
+    
     const related = await getRelatedPosts('post-a');
     expect(related.find((p) => p.slug === 'draft-post')).toBeUndefined();
   });
@@ -986,19 +986,19 @@ describe('getRelatedPosts', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 13. calculateReadingTime (5+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('calculateReadingTime', () => {
   it('calculates at 200 wpm', () => {
-    // 200 words => 1 minute
+    
     const words = Array(200).fill('word').join(' ');
     expect(calculateReadingTime(words)).toBe(1);
   });
 
   it('rounds up partial minutes', () => {
-    // 201 words => ceil(201/200) = 2
+    
     const words = Array(201).fill('word').join(' ');
     expect(calculateReadingTime(words)).toBe(2);
   });
@@ -1008,7 +1008,7 @@ describe('calculateReadingTime', () => {
   });
 
   it('handles empty content', () => {
-    // '' split by /\s+/ yields [''] => length 1 => ceil(1/200) = 1
+    
     expect(calculateReadingTime('')).toBe(1);
   });
 
@@ -1019,14 +1019,14 @@ describe('calculateReadingTime', () => {
 
   it('counts words separated by various whitespace', () => {
     const text = 'one\ttwo\nthree   four';
-    // 4 words => ceil(4/200) = 1
+    
     expect(calculateReadingTime(text)).toBe(1);
   });
 });
 
-// ---------------------------------------------------------------------------
-// 14. calculateWordCount (3+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('calculateWordCount', () => {
   it('counts words correctly', () => {
@@ -1038,7 +1038,7 @@ describe('calculateWordCount', () => {
   });
 
   it('handles empty content', () => {
-    // '' split by /\s+/ yields [''] => length 1
+    
     expect(calculateWordCount('')).toBe(1);
   });
 
@@ -1047,9 +1047,9 @@ describe('calculateWordCount', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 15. extractExcerpt (8+ tests)
-// ---------------------------------------------------------------------------
+
+
+
 
 describe('extractExcerpt', () => {
   it('strips markdown headers', () => {
@@ -1076,7 +1076,7 @@ describe('extractExcerpt', () => {
     const longText = 'word '.repeat(100);
     const result = extractExcerpt(longText, 20);
     expect(result.endsWith('...')).toBe(true);
-    expect(result.length).toBeLessThanOrEqual(23); // 20 chars + '...'
+    expect(result.length).toBeLessThanOrEqual(23); 
   });
 
   it('adds ellipsis when truncated', () => {
@@ -1093,7 +1093,7 @@ describe('extractExcerpt', () => {
   it('respects custom maxLength', () => {
     const text = 'one two three four five six seven eight nine ten';
     const result = extractExcerpt(text, 10);
-    expect(result.length).toBeLessThanOrEqual(13); // 10 + '...'
+    expect(result.length).toBeLessThanOrEqual(13); 
   });
 
   it('replaces newlines with spaces', () => {
